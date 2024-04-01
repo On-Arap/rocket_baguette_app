@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_theme/json_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,10 +30,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: widget.theme,
+      theme: widget.theme.copyWith(textTheme: ThemeData.light().textTheme.apply(fontFamily: GoogleFonts.montserrat().fontFamily)),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Rocket Baguette'),
+          title: const Text(
+            'ROCKET BAGUETTE',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
         body: const Center(
           child: Text("Body"),
