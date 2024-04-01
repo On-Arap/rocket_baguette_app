@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rocket_baguette_app/core/classes/destinations.dart';
+import 'package:rocket_baguette_app/core/widgets/twitch_player.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.destination});
@@ -15,8 +16,11 @@ class HomePage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: const Center(
-        child: Text("HOME"),
+      body: const Column(
+        children: [
+          Text("TWITCH PLAYER"),
+          TwitchPlayer(),
+        ],
       ),
     );
   }
