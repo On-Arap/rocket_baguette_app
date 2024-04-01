@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_theme/json_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rocket_baguette_app/root_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,17 +32,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: widget.theme.copyWith(textTheme: ThemeData.light().textTheme.apply(fontFamily: GoogleFonts.montserrat().fontFamily)),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'ROCKET BAGUETTE',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        body: const Center(
-          child: Text("Body"),
-        ),
-      ),
+      home: const RootPage(),
       debugShowCheckedModeBanner: false,
     );
   }
