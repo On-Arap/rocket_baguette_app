@@ -9,28 +9,22 @@ class TwitchPlayer extends StatefulWidget {
 }
 
 class _TwitchPlayerState extends State<TwitchPlayer> {
-  late final WebViewController _controller;
-
-  @override
-  void initState() {
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse('https://player.twitch.tv/?channel=rocketbaguette&enableExtensions=true&muted=false&parent=twitch.tv&quality=chunked&volume=0.50'));
-    super.initState();
-  }
+  final WebViewController _controller = WebViewController()
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setNavigationDelegate(
+      NavigationDelegate(
+        onProgress: (int progress) {
+          // Update loading bar.
+        },
+        onPageStarted: (String url) {},
+        onPageFinished: (String url) {},
+        onWebResourceError: (WebResourceError error) {},
+        onNavigationRequest: (NavigationRequest request) {
+          return NavigationDecision.navigate;
+        },
+      ),
+    )
+    ..loadRequest(Uri.parse('https://player.twitch.tv/?channel=rocketbaguette&enableExtensions=true&muted=false&parent=twitch.tv&quality=chunked&volume=0.50'));
 
   @override
   Widget build(BuildContext context) {

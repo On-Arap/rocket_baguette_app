@@ -17,10 +17,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: const Column(
-        children: [
-          Text("TWITCH PLAYER"),
-          TwitchPlayer(),
-        ],
+        children: [Text("TWITCH PLAYER"), TwitchPlayer()],
       ),
     );
   }
