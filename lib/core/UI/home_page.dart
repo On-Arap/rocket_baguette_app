@@ -10,10 +10,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.all(15.0),
+      padding: EdgeInsets.all(10.0),
       child: Column(
         children: [
-          Text("TWITCH PLAYER"),
+          Text(
+            "Twitch",
+            style: TextStyle(fontSize: 10),
+          ),
           TwitchPlayer(),
         ],
       ),
