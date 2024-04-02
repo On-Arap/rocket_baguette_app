@@ -8,16 +8,8 @@ class ProfilPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'ROCKET BAGUETTE',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: const Center(
-        child: Text("PROFIL"),
-      ),
+    return const Center(
+      child: Text("PROFIL"),
     );
   }
 }

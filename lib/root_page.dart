@@ -67,6 +67,21 @@ class _RootPageState extends State<RootPage> with TickerProviderStateMixin<RootP
         navigator.pop();
       },
       child: Scaffold(
+        appBar: AppBar(
+          title: const Row(
+            children: [
+              Image(
+                image: AssetImage("assets/logo.png"),
+                height: 40,
+              ),
+              SizedBox(width: 15),
+              Text(
+                'ROCKET BAGUETTE',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
         body: SafeArea(
           top: false,
           child: Stack(

@@ -9,15 +9,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'ROCKET BAGUETTE',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: const Column(
-        children: [Text("TWITCH PLAYER"), TwitchPlayer()],
+    return const Padding(
+      padding: EdgeInsets.all(15.0),
+      child: Column(
+        children: [
+          Text("TWITCH PLAYER"),
+          TwitchPlayer(),
+        ],
       ),
     );
   }
