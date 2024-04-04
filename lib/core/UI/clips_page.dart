@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rocket_baguette_app/core/classes/destinations.dart';
+import 'package:rocket_baguette_app/core/widgets/clip_tile.dart';
 
 class ClipsPage extends StatelessWidget {
   const ClipsPage({super.key, required this.destination});
@@ -8,8 +9,10 @@ class ClipsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("CLIPS"),
+    return const Column(
+      children: [
+        ClipTile(),
+      ],
     );
   }
 }
