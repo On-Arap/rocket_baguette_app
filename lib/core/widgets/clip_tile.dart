@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
 class ClipTile extends StatelessWidget {
-  const ClipTile({super.key});
+  final String imgClip;
+  final String player;
+  final String description;
+  final String team1;
+  final String team2;
+
+  const ClipTile({
+    super.key,
+    required this.imgClip,
+    required this.player,
+    required this.description,
+    required this.team1,
+    required this.team2,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,28 +26,42 @@ class ClipTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(children: [
-            const Image(
-              image: AssetImage("assets/atow_goal.jpg"),
+            Image(
+              image: AssetImage(imgClip),
               height: 40,
             ),
             const SizedBox(width: 15),
             Expanded(
               child: Column(children: [
                 Text(
-                  '🇧🇪 Atow',
+                  player,
                   style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
                   textAlign: TextAlign.left,
                 ),
                 Text(
-                  'Pinch en Overtime',
+                  description,
                   style: TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
               ]),
             ),
-            Text(
-              'vs Team Falcons',
-              style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.primary),
-              textAlign: TextAlign.right,
+            Row(
+              children: [
+                Image(
+                  image: AssetImage("assets/teams/$team1.png"),
+                  height: 30,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  'vs',
+                  style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.primary),
+                  textAlign: TextAlign.right,
+                ),
+                const SizedBox(width: 5),
+                Image(
+                  image: AssetImage("assets/teams/$team2.png"),
+                  height: 30,
+                ),
+              ],
             ),
           ]),
         ),

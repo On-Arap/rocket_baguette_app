@@ -11,7 +11,27 @@ class ClipsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        ClipTile(),
+        ClipTile(
+          imgClip: "assets/atow_goal.jpg",
+          player: "🇧🇪 Atow",
+          description: "Pinch en Overtime",
+          team1: 'kc',
+          team2: 'fc',
+        ),
+        ClipTile(
+          imgClip: "assets/juicy_goal.jpg",
+          player: "🇫🇷 Juicy",
+          description: "Juicy avec la plus grande passe des RLCS",
+          team1: 'm8',
+          team2: 'kc',
+        ),
+        ClipTile(
+          imgClip: "assets/rise_goal.jpg",
+          player: "🇬🇧 Rise",
+          description: "Rise double tap de fou malade",
+          team1: 'kc',
+          team2: 'fc',
+        ),
       ],
     );
   }
