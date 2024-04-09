@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class ClipTile extends StatelessWidget {
   final String imgClip;
@@ -28,25 +29,37 @@ class ClipTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(children: [
-                Image(
-                  image: AssetImage(imgClip),
-                  height: 40,
-                ),
-                const SizedBox(width: 15),
+                !shown
+                    ? Hero(
+                        tag: "clip_img",
+                        child: Image(
+                          image: AssetImage(imgClip),
+                          height: 40,
+                        ),
+                      )
+                    : const SizedBox(width: 0),
+                !shown ? const SizedBox(width: 15) : const SizedBox(width: 0),
                 Expanded(
-                  child: Column(children: [
-                    Text(
-                      player,
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
-                      textAlign: TextAlign.left,
-                    ),
-                    Text(
-                      description,
-                      style: TextStyle(color: Theme.of(context).colorScheme.primary),
-                    ),
-                  ]),
+                  child: Column(
+                    children: [
+                      Text(
+                        player,
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
+                        textAlign: TextAlign.left,
+                      ),
+                      SizedBox(
+                        width: 150,
+                        child: Text(
+                          description,
+                          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   children: [
@@ -68,7 +81,16 @@ class ClipTile extends StatelessWidget {
                   ],
                 ),
               ]),
-              shown ? const SizedBox(height: 50) : const SizedBox(height: 0),
+              shown
+                  ? Hero(
+                      tag: "clip_img",
+                      child: Container(
+                          height: MediaQuery.of(context).size.height - 500,
+                          width: MediaQuery.of(context).size.width - 20,
+                          decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, borderRadius: const BorderRadius.all(Radius.circular(5))),
+                          child: Padding(padding: const EdgeInsets.all(5), child: InAppWebView(initialUrlRequest: URLRequest(url: WebUri("https://youtube.com/shorts/Bo5jG9jTlok?si=tAyXROa8S9Z7kBHC"))))),
+                    )
+                  : const SizedBox(height: 0),
             ],
           ),
         ),
