@@ -6,6 +6,7 @@ class ClipTile extends StatelessWidget {
   final String description;
   final String team1;
   final String team2;
+  final bool shown;
 
   const ClipTile({
     super.key,
@@ -14,6 +15,7 @@ class ClipTile extends StatelessWidget {
     required this.description,
     required this.team1,
     required this.team2,
+    required this.shown,
   });
 
   @override
@@ -25,45 +27,50 @@ class ClipTile extends StatelessWidget {
         decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, borderRadius: const BorderRadius.all(Radius.circular(5))),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(children: [
-            Image(
-              image: AssetImage(imgClip),
-              height: 40,
-            ),
-            const SizedBox(width: 15),
-            Expanded(
-              child: Column(children: [
-                Text(
-                  player,
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
-                  textAlign: TextAlign.left,
+          child: Column(
+            children: [
+              Row(children: [
+                Image(
+                  image: AssetImage(imgClip),
+                  height: 40,
                 ),
-                Text(
-                  description,
-                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                const SizedBox(width: 15),
+                Expanded(
+                  child: Column(children: [
+                    Text(
+                      player,
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      description,
+                      style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                    ),
+                  ]),
+                ),
+                Row(
+                  children: [
+                    Image(
+                      image: AssetImage("assets/teams/$team1.png"),
+                      height: 30,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      'vs',
+                      style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.primary),
+                      textAlign: TextAlign.right,
+                    ),
+                    const SizedBox(width: 5),
+                    Image(
+                      image: AssetImage("assets/teams/$team2.png"),
+                      height: 30,
+                    ),
+                  ],
                 ),
               ]),
-            ),
-            Row(
-              children: [
-                Image(
-                  image: AssetImage("assets/teams/$team1.png"),
-                  height: 30,
-                ),
-                const SizedBox(width: 5),
-                Text(
-                  'vs',
-                  style: TextStyle(fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.primary),
-                  textAlign: TextAlign.right,
-                ),
-                const SizedBox(width: 5),
-                Image(
-                  image: AssetImage("assets/teams/$team2.png"),
-                  height: 30,
-                ),
-              ],
-            ),
-          ]),
+              shown ? const SizedBox(height: 50) : const SizedBox(height: 0),
+            ],
+          ),
         ),
       ),
     );
