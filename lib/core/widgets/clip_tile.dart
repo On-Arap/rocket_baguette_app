@@ -85,7 +85,7 @@ class ClipTile extends StatelessWidget {
                   ? Hero(
                       tag: "clip_img",
                       child: Container(
-                          height: MediaQuery.of(context).size.height - 500,
+                          height: 200,
                           width: MediaQuery.of(context).size.width - 20,
                           decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, borderRadius: const BorderRadius.all(Radius.circular(5))),
                           child: Padding(padding: const EdgeInsets.all(5), child: InAppWebView(initialUrlRequest: URLRequest(url: WebUri("https://youtube.com/shorts/Bo5jG9jTlok?si=tAyXROa8S9Z7kBHC"))))),
