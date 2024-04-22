@@ -49,7 +49,11 @@ class _ClipsPageState extends State<ClipsPage> {
           .map((e) => InkWell(
                 onTap: () {
                   setState(() {
-                    widget.clipselected = e.index;
+                    if (widget.clipselected == e.index) {
+                      widget.clipselected = 0;
+                    } else {
+                      widget.clipselected = e.index;
+                    }
                   });
                 },
                 child: ClipTile(
