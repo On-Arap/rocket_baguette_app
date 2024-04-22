@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:rocket_baguette_app/core/data/tweet/tweet_bloc.dart';
 
 class TwitterFeed extends StatefulWidget {
   const TwitterFeed({super.key});
@@ -11,17 +15,26 @@ class TwitterFeed extends StatefulWidget {
 class _TwitterFeedState extends State<TwitterFeed> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: MediaQuery.of(context).size.height - 200,
-        width: MediaQuery.of(context).size.width - 20,
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, borderRadius: const BorderRadius.all(Radius.circular(5))),
-        child: Padding(
-          padding: const EdgeInsets.all(5),
-          child: InAppWebView(initialUrlRequest: URLRequest(url: WebUri("https://twitter.com/RocketBaguette?ref_src=twsrc%5Etfw"))),
-        ),
-      ),
-    );
+    return BlocBuilder<TweetBloc, TweetState>(builder: (context, state) {
+      if (state is TweetLoaded) {
+        inspect(state.tweets);
+        return Padding(
+          padding: const EdgeInsets.only(top: 15.0),
+          child: SingleChildScrollView(
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: state.tweets.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Text(state.tweets[index]);
+              },
+            ),
+          ),
+        );
+      } else {
+        return const CircularProgressIndicator();
+      }
+    });
   }
 }
 
