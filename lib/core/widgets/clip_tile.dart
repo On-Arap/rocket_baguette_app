@@ -85,10 +85,13 @@ class ClipTile extends StatelessWidget {
                   ? Hero(
                       tag: "clip_img",
                       child: Container(
-                          height: 200,
-                          width: MediaQuery.of(context).size.width - 20,
+                          height: 300,
+                          width: MediaQuery.of(context).size.width - 10,
                           decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, borderRadius: const BorderRadius.all(Radius.circular(5))),
-                          child: Padding(padding: const EdgeInsets.all(5), child: InAppWebView(initialUrlRequest: URLRequest(url: WebUri("https://youtube.com/shorts/Bo5jG9jTlok?si=tAyXROa8S9Z7kBHC"))))),
+                          child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child:
+                                  InAppWebView(initialUrlRequest: URLRequest(url: WebUri("https://clips.twitch.tv/embed?clip=HilariousGlutenFreeGullCharlieBitMe-_C6BRiDejYtFMxXN&parent=com.example.rocket_baguette_app&autoplay=true&muted=false"))))),
                     )
                   : const SizedBox(height: 0),
             ],

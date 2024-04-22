@@ -33,13 +33,13 @@ class TweetBloc extends Bloc<TweetEvent, TweetState> {
     );
     inspect(response);
 
-    if (response.statusCode == 200) {
-      final tweets = jsonDecode(response.body);
-      inspect(tweets);
-      final latestTweet = tweets[0]['text'];
-    } else {
-      throw Exception('Failed to fetch latest tweet $response');
-    }
+    // if (response.statusCode == 200) {
+    //   final tweets = jsonDecode(response.body);
+    //   inspect(tweets);
+    //   final latestTweet = tweets[0]['text'];
+    // } else {
+    //   throw Exception('Failed to fetch latest tweet $response');
+    // }
 
     emit(TweetLoaded(tweets: ['1', '2', '3', '4', '5']));
   }
