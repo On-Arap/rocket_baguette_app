@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class ClipTile extends StatelessWidget {
-  final String imgClip;
   final String player;
   final String description;
   final String team1;
@@ -11,7 +10,6 @@ class ClipTile extends StatelessWidget {
 
   const ClipTile({
     super.key,
-    required this.imgClip,
     required this.player,
     required this.description,
     required this.team1,

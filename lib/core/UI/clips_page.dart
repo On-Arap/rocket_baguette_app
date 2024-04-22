@@ -1,34 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rocket_baguette_app/core/classes/destinations.dart';
+import 'package:rocket_baguette_app/core/data/blocs/clips/clips_bloc.dart';
 import 'package:rocket_baguette_app/core/widgets/clip_tile.dart';
-import 'package:rocket_baguette_app/core/classes/clip.dart';
-
-List<Clip> data = [
-  Clip(
-    index: 1,
-    imgClip: "assets/atow_goal.jpg",
-    player: "🇧🇪 Atow",
-    description: "Pinch en Overtime",
-    team1: 'kc',
-    team2: 'fc',
-  ),
-  Clip(
-    index: 2,
-    imgClip: "assets/juicy_goal.jpg",
-    player: "🇫🇷 Juicy",
-    description: "Juicy avec la plus grande passe des RLCS",
-    team1: 'm8',
-    team2: 'kc',
-  ),
-  Clip(
-    index: 3,
-    imgClip: "assets/rise_goal.jpg",
-    player: "🇬🇧 Rise",
-    description: "Rise double tap de fou malade",
-    team1: 'kc',
-    team2: 'fc',
-  )
-];
 
 class ClipsPage extends StatefulWidget {
   int clipselected = 0;
@@ -44,28 +18,39 @@ class ClipsPage extends StatefulWidget {
 class _ClipsPageState extends State<ClipsPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: data
-          .map((e) => InkWell(
+    return BlocBuilder<ClipsBloc, ClipsState>(builder: (context, state) {
+      if (state is ClipsLoaded) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.builder(
+            shrinkWrap: false,
+            itemCount: state.clips.length,
+            itemBuilder: (BuildContext context, int index) {
+              var exp = state.clips[index];
+              return InkWell(
                 onTap: () {
                   setState(() {
-                    if (widget.clipselected == e.index) {
+                    if (widget.clipselected == exp.index) {
                       widget.clipselected = 0;
                     } else {
-                      widget.clipselected = e.index;
+                      widget.clipselected = exp.index;
                     }
                   });
                 },
                 child: ClipTile(
-                  imgClip: e.imgClip,
-                  player: e.player,
-                  description: e.description,
-                  team1: e.team1,
-                  team2: e.team2,
-                  shown: widget.clipselected == e.index,
+                  player: exp.player,
+                  description: exp.description,
+                  team1: exp.team1,
+                  team2: exp.team2,
+                  shown: widget.clipselected == exp.index,
                 ),
-              ))
-          .toList(),
-    );
+              );
+            },
+          ),
+        );
+      } else {
+        return const CircularProgressIndicator(color: Colors.red);
+      }
+    });
   }
 }

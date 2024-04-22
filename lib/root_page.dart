@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rocket_baguette_app/core/data/blocs/clips/clips_bloc.dart';
+import 'package:rocket_baguette_app/core/data/blocs/tweet/tweet_bloc.dart';
 
 import '../core/classes/destinations.dart';
 import '../core/routes/destination_view.dart';
@@ -66,55 +69,65 @@ class _RootPageState extends State<RootPage> with TickerProviderStateMixin<RootP
         final NavigatorState navigator = navigatorKeys[selectedIndex].currentState!;
         navigator.pop();
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Row(
-            children: [
-              Image(
-                image: AssetImage("assets/logo.png"),
-                height: 40,
-              ),
-              SizedBox(width: 15),
-              Text(
-                'ROCKET BAGUETTE',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => TweetBloc()..add(LoadingTweetEvent()),
           ),
-        ),
-        body: SafeArea(
-          top: false,
-          child: Stack(
-            fit: StackFit.expand,
-            children: allDestinations.map((Destination destination) {
-              final int index = destination.index;
-              final Widget view = destinationViews[index];
-              if (index == selectedIndex) {
-                destinationFaders[index].forward();
-                return Offstage(offstage: false, child: view);
-              } else {
-                destinationFaders[index].reverse();
-                if (destinationFaders[index].isAnimating) {
-                  return IgnorePointer(child: view);
+          BlocProvider(
+            create: (context) => ClipsBloc()..add(LoadingClipEvent()),
+          ),
+        ],
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Row(
+              children: [
+                Image(
+                  image: AssetImage("assets/logo.png"),
+                  height: 40,
+                ),
+                SizedBox(width: 15),
+                Text(
+                  'ROCKET BAGUETTE',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          body: SafeArea(
+            top: false,
+            child: Stack(
+              fit: StackFit.expand,
+              children: allDestinations.map((Destination destination) {
+                final int index = destination.index;
+                final Widget view = destinationViews[index];
+                if (index == selectedIndex) {
+                  destinationFaders[index].forward();
+                  return Offstage(offstage: false, child: view);
+                } else {
+                  destinationFaders[index].reverse();
+                  if (destinationFaders[index].isAnimating) {
+                    return IgnorePointer(child: view);
+                  }
+                  return Offstage(child: view);
                 }
-                return Offstage(child: view);
-              }
+              }).toList(),
+            ),
+          ),
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: selectedIndex,
+            onDestinationSelected: (int index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            destinations: allDestinations.map((Destination destination) {
+              return NavigationDestination(
+                icon: Icon(destination.icon),
+                label: destination.title,
+              );
             }).toList(),
           ),
-        ),
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: selectedIndex,
-          onDestinationSelected: (int index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
-          destinations: allDestinations.map((Destination destination) {
-            return NavigationDestination(
-              icon: Icon(destination.icon),
-              label: destination.title,
-            );
-          }).toList(),
         ),
       ),
     );
