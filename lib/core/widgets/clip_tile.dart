@@ -77,6 +77,7 @@ class ClipTile extends StatelessWidget {
               ]),
               AnimatedContainer(
                   duration: const Duration(milliseconds: 120),
+                  curve: Curves.decelerate,
                   height: animatedHeight,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.secondaryContainer,
