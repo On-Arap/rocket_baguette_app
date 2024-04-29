@@ -8,7 +8,7 @@ class ClipTile extends StatelessWidget {
   final String team2;
   final bool shown;
 
-  const ClipTile({
+  ClipTile({
     super.key,
     required this.player,
     required this.description,
@@ -19,11 +19,15 @@ class ClipTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double animatedHeight = (!shown ? 0.0 : 300.0);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
         width: MediaQuery.of(context).size.width - 20,
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, borderRadius: const BorderRadius.all(Radius.circular(5))),
+        decoration: BoxDecoration(
+            color: Colors.transparent,
+            border: Border.all(width: 3, color: Theme.of(context).colorScheme.primaryContainer),
+            boxShadow: [BoxShadow(color: Theme.of(context).colorScheme.secondaryContainer, spreadRadius: 0, blurRadius: 0, offset: Offset(5, 5))]),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -71,19 +75,18 @@ class ClipTile extends StatelessWidget {
                   ],
                 ),
               ]),
-              shown
-                  ? Hero(
-                      tag: "clip_img",
-                      child: Container(
-                          height: 300,
-                          width: MediaQuery.of(context).size.width - 10,
-                          decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, borderRadius: const BorderRadius.all(Radius.circular(5))),
-                          child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child:
-                                  InAppWebView(initialUrlRequest: URLRequest(url: WebUri("https://clips.twitch.tv/embed?clip=HilariousGlutenFreeGullCharlieBitMe-_C6BRiDejYtFMxXN&parent=com.example.rocket_baguette_app&autoplay=true&muted=false"))))),
-                    )
-                  : const SizedBox(height: 0),
+              AnimatedContainer(
+                  duration: const Duration(milliseconds: 120),
+                  height: animatedHeight,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: InAppWebView(initialUrlRequest: URLRequest(url: WebUri("https://clips.twitch.tv/embed?clip=HilariousGlutenFreeGullCharlieBitMe-_C6BRiDejYtFMxXN&parent=com.example.rocket_baguette_app&autoplay=false&muted=false"))))),
             ],
           ),
         ),
