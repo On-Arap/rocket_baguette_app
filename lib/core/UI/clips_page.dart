@@ -5,9 +5,7 @@ import 'package:rocket_baguette_app/core/data/blocs/clips/clips_bloc.dart';
 import 'package:rocket_baguette_app/core/widgets/clip_tile.dart';
 
 class ClipsPage extends StatefulWidget {
-  int clipselected = 0;
-
-  ClipsPage({super.key, required this.destination});
+  const ClipsPage({super.key, required this.destination});
 
   final Destination destination;
 
@@ -16,6 +14,8 @@ class ClipsPage extends StatefulWidget {
 }
 
 class _ClipsPageState extends State<ClipsPage> {
+  int clipselected = 0;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ClipsBloc, ClipsState>(builder: (context, state) {
@@ -30,10 +30,10 @@ class _ClipsPageState extends State<ClipsPage> {
               return InkWell(
                 onTap: () {
                   setState(() {
-                    if (widget.clipselected == exp.index) {
-                      widget.clipselected = 0;
+                    if (clipselected == exp.index) {
+                      clipselected = 0;
                     } else {
-                      widget.clipselected = exp.index;
+                      clipselected = exp.index;
                     }
                   });
                 },
@@ -42,7 +42,7 @@ class _ClipsPageState extends State<ClipsPage> {
                   description: exp.description,
                   team1: exp.team1,
                   team2: exp.team2,
-                  shown: widget.clipselected == exp.index,
+                  shown: clipselected == exp.index,
                 ),
               );
             },

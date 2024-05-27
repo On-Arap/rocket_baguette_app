@@ -8,7 +8,7 @@ class ClipTile extends StatelessWidget {
   final String team2;
   final bool shown;
 
-  ClipTile({
+  const ClipTile({
     super.key,
     required this.player,
     required this.description,
@@ -27,7 +27,7 @@ class ClipTile extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.transparent,
             border: Border.all(width: 3, color: Theme.of(context).colorScheme.primaryContainer),
-            boxShadow: [BoxShadow(color: Theme.of(context).colorScheme.secondaryContainer, spreadRadius: 0, blurRadius: 0, offset: Offset(5, 5))]),
+            boxShadow: [BoxShadow(color: Theme.of(context).colorScheme.secondaryContainer, spreadRadius: 0, blurRadius: 0, offset: const Offset(5, 5))]),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

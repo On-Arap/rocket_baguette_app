@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:rocket_baguette_app/core/data/blocs/tweet/tweet_bloc.dart';
 
 class TwitterFeed extends StatefulWidget {
